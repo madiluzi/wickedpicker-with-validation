@@ -3,28 +3,17 @@ let event_start_time = $('.timepicker-start').wickedpicker({
     twentyFour: true,
     title: ''
 });
-// let event_start_time = $('.timepicker-start');
 
 let event_end_time = $('.timepicker-end').wickedpicker({
     now: '09:45',
     twentyFour: true,
     title: ''
 });
-// let event_end_time = $('.timepicker-end');
-
 event_start_time.on('change', function () {
-    // $(this).wickedpicker({
-    //     twentyFour: true,
-    //     title: ''
-    // });
     setMax($(this), event_end_time)
 })
 
 event_end_time.on('change', function () {
-    // $(this).wickedpicker({
-    //     twentyFour: true,
-    //     title: ''
-    // });
     setMin($(this), event_start_time)
 })
 
@@ -40,45 +29,37 @@ function setMax(elem, target) {
     let currentTargetMinute = parseInt(currentTargetArray[1]);
 
     if (currentHour == currentTargetHour) {
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'hidden')
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
+        show('hour', 'down')
         console.log('currentHour == currentTargetHour')
 
         if (currentMinute < currentTargetMinute) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible')
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible')
+            show('minute', 'all')
             console.log('currentMinute < currentTargetMinute')
 
             if (currentMinute == 0) {
-                $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible')
-                $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'hidden')
+                show('minute', 'up')
                 console.log('currentMinute == 0')
             }
         }
 
         if (currentMinute == (currentTargetMinute - 1)) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'hidden')
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible')
+            show('minute', 'down')
             console.log('currentMinute == (currentTargetMinute - 1)')
         }
     }
 
     if (currentHour < currentTargetHour) {
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible')
+        show('hour', 'all')
+        show('minute', 'all')
         console.log('currentHour < currentTargetHour')
 
         if (currentHour == 0) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'hidden')
+            show('hour', 'up')
             console.log('currentHour == 0')
         }
 
         if ((currentTargetHour - 1) == currentHour && currentMinute >= currentTargetMinute) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'hidden')
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
+            show('hour', 'down')
             console.log('(currentHour - 1) == currentTargetHour && currentMinute >= currentTargetMinute')
         }
     }
@@ -103,15 +84,12 @@ function setMax(elem, target) {
         console.log('targetMinute : ' + targetMinute)
 
         if (targetHour > hour && targetHour < 23) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible');
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible');
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible');
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible');
+            show('hour', 'all')
+            show('minute', 'all')
             console.log('targetHour > hour && targetHour < 23')
 
             if (targetHour == (hour + 1) && targetMinute <= minute) {
-                $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible');
-                $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'hidden');
+                show('hour', 'up')
                 console.log('targetHour == (hour + 1) && targetMinute < minute')
             }
         }
@@ -131,45 +109,37 @@ function setMin(elem, target) {
     let currentTargetMinute = parseInt(currentTargetArray[1]);
 
     if (currentHour == currentTargetHour) {
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'hidden')
+        show('hour', 'up')
         console.log('currentHour == currentTargetHour')
 
         if (currentMinute > currentTargetMinute) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible')
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible')
+            show('minute', 'all')
             console.log('currentMinute > currentTargetMinute')
 
             if (currentMinute == 59) {
-                $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'hidden')
-                $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible')
+                show('minute', 'down')
                 console.log('currentMinute == 59')
             }
         }
 
         if (currentMinute == (currentTargetMinute + 1)) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible')
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'hidden')
+            show('minute', 'up')
             console.log('currentMinute == (currentTargetMinute + 1)')
         }
     }
 
     if (currentHour > currentTargetHour) {
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible')
-        $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible')
+        show('hour', 'all')
+        show('minute', 'all')
         console.log('currentHour > currentTargetHour')
 
         if (currentHour == 23) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'hidden')
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
+            show('hour', 'down')
             console.log('currentHour == 23')
         }
 
         if ((currentTargetHour + 1) == currentHour && currentMinute <= currentTargetMinute) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'hidden')
+            show('hour', 'up')
             console.log('(currentHour - 1) == currentTargetHour && currentMinute > currentTargetMinute')
         }
     }
@@ -194,17 +164,50 @@ function setMin(elem, target) {
         console.log('targetMinute : ' + targetMinute)
 
         if (targetHour < hour && targetHour > 0) {
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible');
-            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible');
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible');
-            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible');
+            show('hour', 'all')
+            show('minute', 'all')
             console.log('targetHour < hour && targetHour > 0')
 
             if (targetHour == (hour - 1) && targetMinute >= minute) {
-                $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'hidden');
-                $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible');
+                show('hour', 'down')
                 console.log('targetHour == (hour - 1) && targetMinute > minute')
             }
         }
     })
+}
+
+function show(time, cond) {
+    if (time == 'hour') {
+        if (cond == 'up') {
+            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
+            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'hidden')
+        }
+
+        if (cond == 'down') {
+            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'hidden')
+            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
+        }
+
+        if (cond == 'all') {
+            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
+            $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-down').css('visibility', 'visible')
+        }
+    }
+
+    if (time == 'minute') {
+        if (cond == 'up') {
+            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible');
+            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'hidden');
+        }
+
+        if (cond == 'down') {
+            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'hidden');
+            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible');
+        }
+
+        if (cond == 'all') {
+            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-up').css('visibility', 'visible');
+            $('.wickedpicker').find('.wickedpicker__controls__control:nth-last-child(2) .wickedpicker__controls__control-down').css('visibility', 'visible');
+        }
+    }
 }
