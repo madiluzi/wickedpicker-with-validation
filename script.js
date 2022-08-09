@@ -30,37 +30,37 @@ function setMax(elem, target) {
     let currentTargetMinute = parseInt(currentTargetArray[1]);
 
     if (currentHour == currentTargetHour) {
-        show('hour', 'down')
+        showTimeToggle('hour', 'down')
         console.log('currentHour == currentTargetHour')
 
         if (currentMinute < currentTargetMinute) {
-            show('minute', 'all')
+            showTimeToggle('minute', 'all')
             console.log('currentMinute < currentTargetMinute')
 
             if (currentMinute == 0) {
-                show('minute', 'up')
+                showTimeToggle('minute', 'up')
                 console.log('currentMinute == 0')
             }
         }
 
         if (currentMinute == (currentTargetMinute - 1)) {
-            show('minute', 'down')
+            showTimeToggle('minute', 'down')
             console.log('currentMinute == (currentTargetMinute - 1)')
         }
     }
 
     if (currentHour < currentTargetHour) {
-        show('hour', 'all')
-        show('minute', 'all')
+        showTimeToggle('hour', 'all')
+        showTimeToggle('minute', 'all')
         console.log('currentHour < currentTargetHour')
 
         if (currentHour == 0) {
-            show('hour', 'up')
+            showTimeToggle('hour', 'up')
             console.log('currentHour == 0')
         }
 
         if ((currentTargetHour - 1) == currentHour && currentMinute >= currentTargetMinute) {
-            show('hour', 'down')
+            showTimeToggle('hour', 'down')
             console.log('(currentHour - 1) == currentTargetHour && currentMinute >= currentTargetMinute')
         }
     }
@@ -85,12 +85,12 @@ function setMax(elem, target) {
         console.log('targetMinute : ' + targetMinute)
 
         if (targetHour > hour && targetHour < 23) {
-            show('hour', 'all')
-            show('minute', 'all')
+            showTimeToggle('hour', 'all')
+            showTimeToggle('minute', 'all')
             console.log('targetHour > hour && targetHour < 23')
 
             if (targetHour == (hour + 1) && targetMinute <= minute) {
-                show('hour', 'up')
+                showTimeToggle('hour', 'up')
                 console.log('targetHour == (hour + 1) && targetMinute < minute')
             }
         }
@@ -110,37 +110,37 @@ function setMin(elem, target) {
     let currentTargetMinute = parseInt(currentTargetArray[1]);
 
     if (currentHour == currentTargetHour) {
-        show('hour', 'up')
+        showTimeToggle('hour', 'up')
         console.log('currentHour == currentTargetHour')
 
         if (currentMinute > currentTargetMinute) {
-            show('minute', 'all')
+            showTimeToggle('minute', 'all')
             console.log('currentMinute > currentTargetMinute')
 
             if (currentMinute == 59) {
-                show('minute', 'down')
+                showTimeToggle('minute', 'down')
                 console.log('currentMinute == 59')
             }
         }
 
         if (currentMinute == (currentTargetMinute + 1)) {
-            show('minute', 'up')
+            showTimeToggle('minute', 'up')
             console.log('currentMinute == (currentTargetMinute + 1)')
         }
     }
 
     if (currentHour > currentTargetHour) {
-        show('hour', 'all')
-        show('minute', 'all')
+        showTimeToggle('hour', 'all')
+        showTimeToggle('minute', 'all')
         console.log('currentHour > currentTargetHour')
 
         if (currentHour == 23) {
-            show('hour', 'down')
+            showTimeToggle('hour', 'down')
             console.log('currentHour == 23')
         }
 
         if ((currentTargetHour + 1) == currentHour && currentMinute <= currentTargetMinute) {
-            show('hour', 'up')
+            showTimeToggle('hour', 'up')
             console.log('(currentHour - 1) == currentTargetHour && currentMinute > currentTargetMinute')
         }
     }
@@ -165,19 +165,19 @@ function setMin(elem, target) {
         console.log('targetMinute : ' + targetMinute)
 
         if (targetHour < hour && targetHour > 0) {
-            show('hour', 'all')
-            show('minute', 'all')
+            showTimeToggle('hour', 'all')
+            showTimeToggle('minute', 'all')
             console.log('targetHour < hour && targetHour > 0')
 
             if (targetHour == (hour - 1) && targetMinute >= minute) {
-                show('hour', 'down')
+                showTimeToggle('hour', 'down')
                 console.log('targetHour == (hour - 1) && targetMinute > minute')
             }
         }
     })
 }
 
-function show(time, cond) {
+function showTimeToggle(time, cond) {
     if (time == 'hour') {
         if (cond == 'up') {
             $('.wickedpicker').find('.wickedpicker__controls__control:first-child .wickedpicker__controls__control-up').css('visibility', 'visible')
