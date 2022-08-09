@@ -9,6 +9,7 @@ let event_end_time = $('.timepicker-end').wickedpicker({
     twentyFour: true,
     title: ''
 });
+
 event_start_time.on('change', function () {
     setMax($(this), event_end_time)
 })
